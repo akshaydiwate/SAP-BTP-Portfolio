@@ -1,0 +1,1501 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="sap">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Akshay Diwate — SAP BTP Consultant</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Fraunces:ital,wght@0,300;0,700;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f0f4ff;
+    --bg2: #ffffff;
+    --bg3: #e8eef8;
+    --text: #0a1628;
+    --text2: #3a4a6b;
+    --accent: #0070f2;
+    --accent2: #00b4ff;
+    --accent3: #005bc1;
+    --card: #ffffff;
+    --card-border: rgba(0,112,242,0.15);
+    --timeline: #0070f2;
+    --tag-bg: rgba(0,112,242,0.1);
+    --tag-text: #0070f2;
+    --hero-text: #ffffff;
+    --shadow: 0 4px 32px rgba(0,112,242,0.12);
+    --grid-color: rgba(0,112,242,0.07);
+    --skill-track: #e0e8f8;
+    --nav-bg: rgba(240,244,255,0.9);
+    --gradient1: #0070f2;
+    --gradient2: #00b4ff;
+    --hero-from: #003087;
+    --hero-to: #0070f2;
+    --orb1: rgba(0,112,242,0.25);
+    --orb2: rgba(0,180,255,0.2);
+  }
+
+  [data-theme="dark"] {
+    --bg: #0b0f1a;
+    --bg2: #111827;
+    --bg3: #141c2e;
+    --text: #e8f0ff;
+    --text2: #8ba0c8;
+    --accent: #38bdf8;
+    --accent2: #7dd3fc;
+    --accent3: #0ea5e9;
+    --card: #131d2e;
+    --card-border: rgba(56,189,248,0.15);
+    --timeline: #38bdf8;
+    --tag-bg: rgba(56,189,248,0.12);
+    --tag-text: #38bdf8;
+    --hero-text: #ffffff;
+    --shadow: 0 4px 40px rgba(56,189,248,0.08);
+    --grid-color: rgba(56,189,248,0.05);
+    --skill-track: rgba(56,189,248,0.08);
+    --nav-bg: rgba(11,15,26,0.92);
+    --gradient1: #0ea5e9;
+    --gradient2: #38bdf8;
+    --hero-from: #050b14;
+    --hero-to: #0c1a30;
+    --orb1: rgba(14,165,233,0.2);
+    --orb2: rgba(56,189,248,0.12);
+  }
+
+  [data-theme="gold"] {
+    --bg: #080706;
+    --bg2: #0f0e0b;
+    --bg3: #120f0a;
+    --text: #f5e8c8;
+    --text2: #a89060;
+    --accent: #d4a017;
+    --accent2: #f0c040;
+    --accent3: #b8860b;
+    --card: #0f0e0b;
+    --card-border: rgba(212,160,23,0.2);
+    --timeline: #d4a017;
+    --tag-bg: rgba(212,160,23,0.12);
+    --tag-text: #f0c040;
+    --hero-text: #ffffff;
+    --shadow: 0 4px 40px rgba(212,160,23,0.1);
+    --grid-color: rgba(212,160,23,0.05);
+    --skill-track: rgba(212,160,23,0.08);
+    --nav-bg: rgba(8,7,6,0.95);
+    --gradient1: #d4a017;
+    --gradient2: #f0c040;
+    --hero-from: #050400;
+    --hero-to: #1a1200;
+    --orb1: rgba(212,160,23,0.18);
+    --orb2: rgba(240,192,64,0.1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Mono', monospace;
+    background: var(--bg);
+    color: var(--text);
+    transition: background 0.4s ease, color 0.4s ease;
+    overflow-x: hidden;
+  }
+
+  /* ====== GRID OVERLAY ====== */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--grid-color) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ====== NAV ====== */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: var(--nav-bg);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--card-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
+    height: 64px;
+    transition: background 0.4s;
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--accent);
+    letter-spacing: 0.02em;
+  }
+  .nav-logo span { color: var(--text); }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text2);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ====== THEME SWITCHER ====== */
+  .theme-bar {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .theme-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.85rem;
+    border-radius: 99px;
+    border: 1.5px solid var(--card-border);
+    background: transparent;
+    cursor: pointer;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text2);
+    transition: all 0.25s ease;
+  }
+
+  .theme-btn:hover, .theme-btn.active {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--tag-bg);
+  }
+
+  .theme-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .dot-sap { background: linear-gradient(135deg, #003087, #0070f2); }
+  .dot-dark { background: linear-gradient(135deg, #0b0f1a, #38bdf8); }
+  .dot-gold { background: linear-gradient(135deg, #1a1200, #d4a017); }
+
+  /* ====== HERO ====== */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--hero-from) 0%, var(--hero-to) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 120px 5% 80px;
+  }
+
+  .hero-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    animation: orbFloat 8s ease-in-out infinite;
+    pointer-events: none;
+  }
+  .hero-orb-1 {
+    width: 500px; height: 500px;
+    background: var(--orb1);
+    top: -100px; right: -100px;
+    animation-delay: 0s;
+  }
+  .hero-orb-2 {
+    width: 350px; height: 350px;
+    background: var(--orb2);
+    bottom: -50px; left: -80px;
+    animation-delay: 3s;
+  }
+
+  @keyframes orbFloat {
+    0%,100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-30px) scale(1.05); }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+    width: 100%;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 1rem;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 99px;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .badge-dot {
+    width: 6px; height: 6px;
+    background: #4ade80;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #4ade80;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%,100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .hero-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(3rem, 7vw, 6rem);
+    color: #fff;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+
+  .hero-name .accent-word {
+    display: block;
+    background: linear-gradient(90deg, var(--gradient2), #fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+    color: rgba(255,255,255,0.75);
+    margin-top: 0.75rem;
+    margin-bottom: 2rem;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+
+  .hero-exp {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 0.06em;
+    animation: fadeUp 0.8s 0.25s ease both;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-contacts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    animation: fadeUp 0.8s 0.35s ease both;
+  }
+
+  .contact-chip {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 1.1rem;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    transition: all 0.25s;
+  }
+  .contact-chip:hover {
+    background: rgba(255,255,255,0.18);
+    border-color: rgba(255,255,255,0.35);
+    transform: translateY(-2px);
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(255,255,255,0.4);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    animation: fadeIn 1s 1s ease both;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%,100% { transform: scaleY(1); opacity: 1; }
+    50% { transform: scaleY(0.6); opacity: 0.4; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* ====== STATS BAR ====== */
+  .stats-bar {
+    background: var(--bg2);
+    border-top: 1px solid var(--card-border);
+    border-bottom: 1px solid var(--card-border);
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0;
+    position: relative;
+    z-index: 2;
+  }
+
+  .stat-item {
+    padding: 2rem 3rem;
+    text-align: center;
+    border-right: 1px solid var(--card-border);
+    flex: 1;
+    min-width: 140px;
+    transition: background 0.3s;
+  }
+  .stat-item:hover { background: var(--tag-bg); }
+  .stat-item:last-child { border-right: none; }
+
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 2.2rem;
+    background: linear-gradient(135deg, var(--gradient1), var(--gradient2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text2);
+    margin-top: 0.35rem;
+  }
+
+  /* ====== SECTIONS ====== */
+  section {
+    position: relative;
+    z-index: 1;
+    padding: 6rem 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 0.6rem;
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    color: var(--text);
+    line-height: 1.1;
+    margin-bottom: 3rem;
+    position: relative;
+  }
+
+  .section-title::after {
+    content: '';
+    display: block;
+    width: 48px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gradient1), var(--gradient2));
+    margin-top: 0.75rem;
+    border-radius: 2px;
+  }
+
+  /* ====== SUMMARY ====== */
+  .summary-wrap {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 2.5rem;
+    font-size: 1rem;
+    line-height: 1.85;
+    color: var(--text2);
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .summary-wrap::before {
+    content: '"';
+    position: absolute;
+    top: -0.5rem;
+    left: 1.5rem;
+    font-family: 'Fraunces', serif;
+    font-size: 8rem;
+    line-height: 1;
+    color: var(--accent);
+    opacity: 0.08;
+    pointer-events: none;
+  }
+
+  /* ====== TIMELINE ====== */
+  .timeline {
+    position: relative;
+    padding-left: 2.5rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--gradient1), transparent);
+  }
+
+  .timeline-entry {
+    position: relative;
+    margin-bottom: 3.5rem;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.5s ease;
+  }
+
+  .timeline-entry.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .timeline-dot {
+    position: absolute;
+    left: -2.9rem;
+    top: 0.3rem;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--timeline);
+    border: 3px solid var(--bg);
+    box-shadow: 0 0 0 3px var(--timeline), 0 0 20px var(--orb1);
+  }
+
+  .timeline-company {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.35rem;
+    color: var(--accent);
+    margin-bottom: 0.2rem;
+  }
+
+  .timeline-role {
+    font-weight: 500;
+    font-size: 0.85rem;
+    color: var(--text);
+    margin-bottom: 0.2rem;
+  }
+
+  .timeline-period {
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    color: var(--text2);
+    margin-bottom: 1.2rem;
+    text-transform: uppercase;
+  }
+
+  .timeline-card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    margin-bottom: 1rem;
+  }
+
+  .role-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.8rem;
+    background: var(--tag-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 99px;
+    font-size: 0.65rem;
+    color: var(--tag-text);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .bullet-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .bullet-list li {
+    display: flex;
+    gap: 0.75rem;
+    font-size: 0.82rem;
+    line-height: 1.65;
+    color: var(--text2);
+  }
+
+  .bullet-list li::before {
+    content: '▹';
+    color: var(--accent);
+    flex-shrink: 0;
+    margin-top: 0.05rem;
+  }
+
+  /* ====== SKILLS ====== */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .skill-category {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 1.8rem;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .skill-category:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow), 0 8px 40px var(--orb1);
+  }
+
+  .skill-cat-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .skill-item {
+    margin-bottom: 1rem;
+  }
+
+  .skill-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.4rem;
+    font-size: 0.78rem;
+    color: var(--text);
+  }
+
+  .skill-pct {
+    font-size: 0.68rem;
+    color: var(--text2);
+  }
+
+  .skill-track {
+    height: 5px;
+    background: var(--skill-track);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+
+  .skill-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gradient1), var(--gradient2));
+    border-radius: 99px;
+    width: 0;
+    transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* ====== ACHIEVEMENTS ====== */
+  .achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .achievement-card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s, border-color 0.3s;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: all 0.4s ease;
+  }
+
+  .achievement-card.visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .achievement-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+  }
+
+  .achievement-icon {
+    font-size: 1.8rem;
+    flex-shrink: 0;
+  }
+
+  .achievement-text {
+    font-size: 0.82rem;
+    color: var(--text2);
+    line-height: 1.6;
+  }
+
+  /* ====== CERTIFICATIONS ====== */
+  .cert-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .cert-card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 1.2rem 1.8rem;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    box-shadow: var(--shadow);
+    cursor: default;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  .cert-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .cert-card:hover {
+    border-color: var(--accent);
+    transform: translateX(8px);
+  }
+
+  .cert-num {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: var(--accent);
+    opacity: 0.35;
+    flex-shrink: 0;
+    min-width: 2.5rem;
+  }
+
+  .cert-text {
+    font-size: 0.85rem;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  .cert-badge {
+    margin-left: auto;
+    padding: 0.3rem 0.75rem;
+    background: var(--tag-bg);
+    border-radius: 99px;
+    font-size: 0.62rem;
+    color: var(--tag-text);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  /* ====== EDUCATION ====== */
+  .edu-card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 2.5rem;
+    box-shadow: var(--shadow);
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .edu-icon {
+    font-size: 3rem;
+    flex-shrink: 0;
+  }
+
+  .edu-info h3 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--text);
+    margin-bottom: 0.3rem;
+  }
+
+  .edu-info .edu-sub {
+    font-size: 0.8rem;
+    color: var(--text2);
+    margin-bottom: 0.3rem;
+  }
+
+  .edu-cgpa {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--tag-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 99px;
+    padding: 0.3rem 0.8rem;
+    font-size: 0.72rem;
+    color: var(--tag-text);
+    margin-top: 0.5rem;
+  }
+
+  /* ====== TOOLS ====== */
+  .tools-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .tool-pill {
+    padding: 0.5rem 1.1rem;
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    font-size: 0.78rem;
+    color: var(--text);
+    transition: all 0.25s;
+    cursor: default;
+  }
+
+  .tool-pill:hover {
+    background: var(--tag-bg);
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  /* ====== PERSONAL ====== */
+  .personal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .personal-item {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    padding: 1.2rem 1.5rem;
+    display: flex;
+    gap: 0.8rem;
+    align-items: flex-start;
+  }
+
+  .personal-label {
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text2);
+    margin-bottom: 0.3rem;
+  }
+
+  .personal-value {
+    font-size: 0.82rem;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  /* ====== FOOTER ====== */
+  footer {
+    background: var(--bg2);
+    border-top: 1px solid var(--card-border);
+    padding: 2rem 5%;
+    text-align: center;
+    font-size: 0.72rem;
+    color: var(--text2);
+    letter-spacing: 0.06em;
+    position: relative;
+    z-index: 1;
+  }
+
+  footer span {
+    color: var(--accent);
+  }
+
+  /* ====== AWARD ====== */
+  .award-card {
+    background: linear-gradient(135deg, var(--hero-from), var(--hero-to));
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 2rem 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .award-card::after {
+    content: '★';
+    position: absolute;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 5rem;
+    opacity: 0.06;
+    color: #fff;
+    line-height: 1;
+  }
+
+  .award-icon { font-size: 2.5rem; }
+
+  .award-text h3 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #fff;
+  }
+  .award-text p { font-size: 0.78rem; color: rgba(255,255,255,0.65); }
+
+  /* ====== SCROLLBAR ====== */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+  /* ====== MOBILE ====== */
+  @media (max-width: 768px) {
+    nav { padding: 0 4%; }
+    .nav-links { display: none; }
+    .theme-btn { padding: 0.3rem 0.6rem; font-size: 0.6rem; }
+    section { padding: 4rem 4%; }
+    .stat-item { padding: 1.5rem; }
+    .edu-card { gap: 1rem; }
+  }
+
+  /* ====== INTERSECTION OBSERVER ====== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Divider */
+  .section-divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--card-border), transparent);
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 0 5%;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">AD<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#summary">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#certs">Certs</a></li>
+    <li><a href="#education">Education & Awards</a></li>
+    <li><a href="#personal">Personal</a></li>
+  </ul>
+  <div class="theme-bar">
+    <button class="theme-btn active" data-theme="sap" onclick="setTheme('sap', this)">
+      <span class="theme-dot dot-sap"></span> SAP
+    </button>
+    <button class="theme-btn" data-theme="dark" onclick="setTheme('dark', this)">
+      <span class="theme-dot dot-dark"></span> Dark
+    </button>
+    <button class="theme-btn" data-theme="gold" onclick="setTheme('gold', this)">
+      <span class="theme-dot dot-gold"></span> Noir
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      Available for Opportunities
+    </div>
+    <h1 class="hero-name">
+      Akshay
+      <span class="accent-word">Divate</span>
+    </h1>
+    <p class="hero-title">SAP Certified Consultant & Global Certified SAP BTP Administrator </p>
+    <p class="hero-exp">5+ Years of Professional Experience · Capgemini → Accenture</p>
+    <div class="hero-contacts">
+      <a class="contact-chip" href="mailto:akshaydiwate1911@gmail.com">
+        ✉ akshaydiwate1911@gmail.com
+      </a>
+      <a class="contact-chip" href="tel:+918788468119">
+        ☏ +91 87884 68119
+      </a>
+      <a class="contact-chip" href="https://www.linkedin.com/in/jb007-24b525161" target="_blank">
+        ⌘ LinkedIn Profile
+      </a>
+      <a class="contact-chip" href="#">
+        ◉ Nashik, Maharashtra
+      </a>
+	  <a class="contact-chip resume-btn" href="Akshay_Divate_Resume.pdf" download>
+		⬇ Download Resume
+	  </a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    Scroll
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-num" data-count="5+">0</div>
+    <div class="stat-label">Years Experience</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num" data-count="5">0</div>
+    <div class="stat-label">Certifications</div>
+  </div>
+  <!--<div class="stat-item">
+    <div class="stat-num" data-count="1500">0</div>
+    <div class="stat-label">Notes Implemented</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num" data-count="25">0</div>
+    <div class="stat-label">% Release Time Saved</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num" data-count="10">0</div>
+    <div class="stat-label">Systems Managed</div>
+  </div>-->
+</div>
+
+<!-- SUMMARY -->
+<section id="summary">
+  <p class="section-label">Professional Summary</p>
+  <h2 class="section-title">Who I Am</h2>
+  <div class="summary-wrap reveal">
+  <strong>SAP Global Certified BTP Administrator and SAP BASIS Consultant</strong> with <strong>5+ years</strong> of experience in SAP BTP 
+Administration, SAP BASIS, and Cloud Migration projects across global enterprise environments. 
+<strong>Experienced in managing SAP BTP Global Accounts, Directories, Subaccounts, Cloud Foundry, SAP Cloud 
+Connector, IAS/SSO integrations, and SAP Build Work Zone.</strong> Strong expertise in SAP Change & Release 
+Management, AWS migration projects, ECC to S/4HANA upgrades, and enterprise-scale SAP landscape 
+administration. Proven track record of delivering complex SAP transformation projects with strong focus 
+on governance, compliance, operational excellence, and zero business escalations. 
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <p class="section-label">Career Timeline</p>
+  <h2 class="section-title">Professional Experience</h2>
+
+  <div class="timeline">
+
+    <!-- Accenture -->
+    <div class="timeline-entry">
+      <div class="timeline-dot"></div>
+      <div class="timeline-company">Accenture India</div>
+      <div class="timeline-role">Packaged App Development — Senior Analyst</div>
+      <div class="timeline-period">June 2025 – Present</div>
+
+      <div class="timeline-card">
+        <div class="role-tag">⚡ SAP BTP &amp; BASIS Admin — <strong>Huntsman Project</strong></div>
+        <ul class="bullet-list">
+          <li>Maintenance of Global Accounts, management of directories and subaccounts, configuration of entitlements, quotas and spaces.</li>
+          <li>Management of DEV, QA and PRD Subaccounts across full lifecycle.</li>
+          <li>Implementation of GRC replacement with SAP DRC for NF-e Documents — Brazil project.</li>
+          <li>Implemented <strong>1500+ Notes</strong> with manual activities — zero regression incidents.</li>
+          <li>User and role management, role collection configuration in BTP Cockpit.</li>
+          <li>Configuration of SAP Build Work Zone, Business Application Studio, SAP DRC, HANA Cloud (Trial).</li>
+          <li>Managing Cloud Connector and setup connectivity between SAP BTP Cockpit and SCC.</li>
+          <li>Managing Cloud Foundry Runtime Environments with Custom Domain Manager and Cloud Identity Services.</li>
+        </ul>
+      </div>
+	  
+	  <div class="timeline-card">
+        <div class="role-tag">⚡ SAP BTP Admin — <strong>Amazon Inc. Global</strong></div>
+        <ul class="bullet-list">
+          <li>Managing Global Account, Entitlements, Directories and Subaccounts of all Business Units across Amazon Inc. Global.</li>
+          <li>Onboarding of all Business Units, Directories, Subaccounts and services structure creation, getting approved and creation of directories, subaccounts and provisioning requested services.</li>
+          <li>Joule Integrations with Various Services like Build Work Zone Std/Adv. </li>
+          <li>SAML2, OIDC Configurations for SSO from IAS to RISE. </li>
+          <li>Creating and maintaining source and target systems to replicate users from RISE to IAS. </li>
+          <li>User and role management, role collection configuration in BTP Cockpit.</li>
+          <li>Managing Cloud connector and setup connectivity between SAP BTP Cockpit and SCC.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Capgemini -->
+    <div class="timeline-entry">
+      <div class="timeline-dot"></div>
+      <div class="timeline-company">Capgemini Technology Services India</div>
+      <div class="timeline-role">Associate Consultant</div>
+      <div class="timeline-period">April 2021 – June 2025</div>
+
+      <div class="timeline-card" style="margin-bottom:1rem">
+        <div class="role-tag">☁ SkyLift Migration — SAP BASIS &amp; Change Manager (Amgen Project) · Mar 2022–Jun 2025</div>
+        <ul class="bullet-list">
+          <li>Worked as BASIS Administrator and <strong>Change Manager</strong> for SkyLift Migration from OnPrem to AWS — end to end.</li>
+          <li>Created and executed IQ/OQ test scripts in ALM; managed defect lifecycle to resolution.</li>
+          <li>Served as Change Manager overseeing migration of OnPrem SAP systems to AWS with zero deviations or escalations.</li>
+          <li>Performed Client Copy, System Refresh and other activities across SAP Landscape using LaMa.</li>
+          <li>Created RTM, SDS, CDS, RS, VSR, VP, Implementation Verification documents for Test and Prod.</li>
+          <li>Working on Technical Upgrade Project (ECC to S/4HANA) as Change Manager for <strong>10 systems</strong>.</li>
+          <li>Kernel/Patch Upgrades, Note Implementation, ChaRM Creation and Transport Management.</li>
+          <li>ServiceNow Change Management — ACAB, ECAB, CAB and Quality Management workflows.</li>
+          <li>N+1 System Build using LaMa along with System Copy from N to N+1 Environment.</li>
+          <li>BTP: Global Accounts, subaccounts, entitlements, Build Work Zone, SCC, Cloud Foundry, Kyma runtime.</li>
+        </ul>
+      </div>
+	  
+	  <div class="timeline-card" style="margin-bottom:1rem">
+        <div class="role-tag">☁ SAP BTP Admin (Amgen Project)</div>
+        <ul class="bullet-list">
+          <li>Hands-on experience in SAP BTP Administration and Monitoring. </li>
+          <li>Maintenance of Global Accounts, management of directories and subaccounts, configuration of entitlements, quotas and spaces.</li>
+          <li>User and role management, role collection configuration.</li>
+          <li>Worked on configuration of SAP Build work zone, SAP Business Applications Studio.</li>
+          <li>Created Spaces and configuration of ABAP Instances.</li>
+          <li>Exposed content from OnPrem S4HANA System to BWZ and connectivity between BWZ and OnPrem S4HANA Systems using Cloud Connector.</li>
+          <li>Managed Cloud connector and setup connectivity between SAP BTP Cockpit and SCC </li>
+          <li>Managed Cloud Foundry Runtime Environments.</li>
+          <li>Hands On experience in various services like Custom Domain Manager, Cloud Identity Services Etc.</li>
+        </ul>
+      </div>
+
+      <div class="timeline-card">
+        <div class="role-tag">⚙ SAP BASIS Release Manager — BD Project · Aug 2021–Mar 2022</div>
+        <ul class="bullet-list">
+          <li>Led SAP release and transport processes — reduced release times by <strong>25%</strong> while maintaining quality.</li>
+          <li>Developed and maintained comprehensive release documentation for audits and reference.</li>
+          <li>Worked on project go-live, confirming all approvals for change requests.</li>
+          <li>Managed risks affecting release scope, schedule and quality; prepared E070 reports.</li>
+          <li>Performed daily health checks and used monitoring tools for SAP system performance.</li>
+          <li>Hands-on Kernel/Patch Upgrades, Note Implementation and Transport Management.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label">Technical Proficiency</p>
+  <h2 class="section-title">Core Skills</h2>
+  <div class="skills-grid">
+
+    <div class="skill-category reveal">
+      <div class="skill-cat-title">⬡ SAP Basis &amp; Administration</div>
+      <div class="skill-item">
+        <div class="skill-header"><span>SAP BASIS Administration</span><span class="skill-pct">95%</span></div>
+        <div class="skill-track"><div class="skill-fill" data-pct="95"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>Transport &amp; Release Management</span><span class="skill-pct">92%</span></div>
+        <div class="skill-track"><div class="skill-fill" data-pct="92"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>Kernel/Patch Upgrades</span><span class="skill-pct">90%</span></div>
+        <div class="skill-track"><div class="skill-fill" data-pct="90"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>SAP LaMa &amp; System Copy</span><span class="skill-pct">87%</span></div>
+        <div class="skill-track"><div class="skill-fill" data-pct="87"></div></div>
+      </div>
+    </div>
+
+    <div class="skill-category reveal">
+      <div class="skill-cat-title">☁ SAP BTP Platform</div>
+      <div class="skill-item">
+        <div class="skill-header"><span>BTP Administration</span><span class="skill-pct">93%</span></div>
+        <div class="skill-track"><div class="skill-fill" data-pct="93"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>Cloud Connector &amp; SCC</span><span class="skill-pct">90%</span></div>
+        <div class="skill-track"><div class="skill-fill" data-pct="90"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>Cloud Foundry &amp; Kyma</span><span class="skill-pct">85%</span></div>
+        <div class="skill-track"><div class="skill-fill" data-pct="85"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>SAP Build Work Zone</span><span class="skill-pct">88%</span></div>
+        <div class="skill-track"><div class="skill-fill" data-pct="88"></div></div>
+      </div>
+    </div>
+
+    <div class="skill-category reveal">
+      <div class="skill-cat-title">⬢ Change &amp; Project Management</div>
+      <div class="skill-item">
+        <div class="skill-header"><span>SAP Change Management</span><span class="skill-pct">92%</span></div>
+        <div class="skill-track"><div class="skill-fill" data-pct="92"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>ServiceNow / ITSM</span><span class="skill-pct">88%</span></div>
+        <div class="skill-track"><div class="skill-fill" data-pct="88"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>Documentation (RTM, SDS, RS)</span><span class="skill-pct">90%</span></div>
+        <div class="skill-track"><div class="skill-fill" data-pct="90"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>AWS Cloud Migration</span><span class="skill-pct">80%</span></div>
+        <div class="skill-track"><div class="skill-fill" data-pct="80"></div></div>
+      </div>
+    </div>
+
+    <div class="skill-category reveal">
+      <div class="skill-cat-title">⬟ Soft Skills</div>
+      <div class="skill-item">
+        <div class="skill-header"><span>Problem Solving &amp; Analytics</span><span class="skill-pct">95%</span></div>
+        <div class="skill-track"><div class="skill-fill" data-pct="95"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>Communication &amp; Stakeholder Mgmt</span><span class="skill-pct">90%</span></div>
+        <div class="skill-track"><div class="skill-fill" data-pct="90"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>Training &amp; Development</span><span class="skill-pct">85%</span></div>
+        <div class="skill-track"><div class="skill-fill" data-pct="85"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>Presentation &amp; Organisation</span><span class="skill-pct">88%</span></div>
+        <div class="skill-track"><div class="skill-fill" data-pct="88"></div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <p class="section-label">Key Wins</p>
+  <h2 class="section-title">Achievements</h2>
+  <div class="achievements-grid">
+    <div class="achievement-card">
+      <div class="achievement-icon">🚀</div>
+      <div class="achievement-text">Successfully managed multiple SAP release cycles with <strong>zero downtime incidents</strong> across all environments.</div>
+    </div>
+    <div class="achievement-card">
+      <div class="achievement-icon">☁</div>
+      <div class="achievement-text">Deployed the <strong>SkyLift Project</strong> — OnPrem to AWS migration — without any failures, deviations or escalations.</div>
+    </div>
+    <div class="achievement-card">
+      <div class="achievement-icon">⚡</div>
+      <div class="achievement-text">Delivered the <strong>ECC to S/4HANA Upgrade</strong> project as Change Manager for 10 systems.</div>
+    </div>
+    <div class="achievement-card">
+      <div class="achievement-icon">📋</div>
+      <div class="achievement-text">Delivered the <strong>GRC → SAP DRC</strong> replacement project with 1500+ notes implemented.</div>
+    </div>
+    <div class="achievement-card">
+      <div class="achievement-icon">⏱</div>
+      <div class="achievement-text">Engineered process improvements that <strong>reduced release times by 25%</strong> while maintaining quality standards.</div>
+    </div>
+    <div class="achievement-card">
+      <div class="achievement-icon">🏆</div>
+      <div class="achievement-text">Recipient of the <strong>Emerging Talent Award</strong> — recognised for outstanding contributions and growth.</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- CERTIFICATIONS -->
+<section id="certs">
+  <p class="section-label">Credentials</p>
+  <h2 class="section-title">Certifications</h2>
+  <div class="cert-list">
+    <div class="cert-card">
+	  <div class="cert-num">01</div>
+      <div class="cert-text"><a href="https://www.credly.com/badges/54fd960a-98ee-498d-b9b1-0232cc5c1c97/public_url" target="_blank">SAP Certified Associate — SAP S/4HANA System Administration</a></div>
+      <div class="cert-badge">SAP Associate</div>
+	</div>
+    <div class="cert-card">
+      <div class="cert-num">02</div>
+      <div class="cert-text"><a href="https://www.credly.com/badges/f454f0ba-4926-4b03-aefc-ac32770156ff/public_url" target="_blank">SAP Certified Technology Specialist — SAP S/4HANA Conversion and SAP System Upgrade</a></div>
+      <div class="cert-badge">SAP Specialist</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-num">03</div>
+      <div class="cert-text"><a href="https://www.credly.com/badges/74e37b3b-a248-4093-b235-ff42a0754e2c/public_url" target="_blank">Discovering SAP Business Technology Platform — Record of Achievement</a></div>
+      <div class="cert-badge">SAP BTP</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-num">04</div>
+      <div class="cert-text"><a href="https://www.credly.com/badges/ff6cfdf7-07c0-4493-b926-157e4a8d62e8/public_url" target="_blank">SAP Certified Professional — Solution Architect — SAP BTP</a></div>
+      <div class="cert-badge">SAP Professional</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-num">05</div>
+      <div class="cert-text"><a href="https://www.credly.com/badges/5627dd7e-0d28-4123-a88a-0d8253085ef3/public_url" target="_blank">SAP Certified — SAP BTP Administrator</a></div>
+      <div class="cert-badge">BTP Admin</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- TOOLS -->
+<section id="tools">
+  <p class="section-label">Tech Stack</p>
+  <h2 class="section-title">Tools &amp; Technologies</h2>
+  <div class="tools-wrap reveal">
+    <span class="tool-pill">SAP BTP Cockpit</span>
+    <!--<span class="tool-pill">HANA Cockpit/Studio</span>
+    <span class="tool-pill">SAP LaMa</span>
+    <span class="tool-pill">SAP SolMan</span>-->
+    <span class="tool-pill">HPALM</span>
+    <span class="tool-pill">CDOCS</span>
+    <span class="tool-pill">ServiceNow</span>
+    <span class="tool-pill">CCMS</span>
+    <span class="tool-pill">QMTS Track Wise</span>
+    <span class="tool-pill">DocuSign</span>
+    <span class="tool-pill">JIRA</span>
+    <!--<span class="tool-pill">Excel</span>
+    <span class="tool-pill">SAP Build Work Zone</span>-->
+    <span class="tool-pill">SAP Cloud Connector</span>
+    <span class="tool-pill">SAP BAS</span>
+    <!--<span class="tool-pill">SAP DRC</span>
+    <span class="tool-pill">HANA Cloud</span>
+    <span class="tool-pill">AWS</span>-->
+    <span class="tool-pill">Cloud Foundry</span>
+    <span class="tool-pill">SAP ChaRM</span>
+    <!--<span class="tool-pill">SAP GRC</span>-->
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- EDUCATION & AWARD -->
+<section id="education">
+  <p class="section-label">Academic Background</p>
+  <h2 class="section-title">Education</h2>
+  <div class="edu-card reveal">
+    <div class="edu-icon">🎓</div>
+    <div class="edu-info">
+      <h3>Bachelor of Engineering — Information Technology</h3>
+      <div class="edu-sub">SND College of Engineering and Research Centre, Yeola</div>
+      <div class="edu-sub">Savitribai Phule Pune University &nbsp;·&nbsp; 2015 – 2019</div>
+      <div class="edu-cgpa">⭐ CGPA: 8.56 / 10.0</div>
+    </div>
+  </div>
+
+  <div class="award-card">
+    <div class="award-icon">🏅</div>
+    <div class="award-text">
+      <h3>Emerging Talent Award</h3>
+      <p>Recognised for exceptional performance, rapid skill acquisition, and outstanding project contributions at Capgemini.</p>
+    </div>
+  </div>
+  
+  <div class="award-card">
+    <div class="award-icon">🏅</div>
+    <div class="award-text">
+      <h3>Experts@myC Award</h3>
+      <p>Recognised for Outstanding dedication and achievement in attaining P4 Proficiency at Accenture.</p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- PERSONAL -->
+<section id="personal">
+  <p class="section-label">Personal Details</p>
+  <h2 class="section-title">About Akshay</h2>
+  <div class="personal-grid">
+    <div class="personal-item reveal">
+      <span style="font-size:1.4rem">🗓</span>
+      <div>
+        <div class="personal-label">Date of Birth</div>
+        <div class="personal-value">19th November 1997</div>
+      </div>
+    </div>
+    <div class="personal-item reveal">
+      <span style="font-size:1.4rem">🌍</span>
+      <div>
+        <div class="personal-label">Nationality</div>
+        <div class="personal-value">Indian</div>
+      </div>
+    </div>
+    <div class="personal-item reveal">
+      <span style="font-size:1.4rem">🗣</span>
+      <div>
+        <div class="personal-label">Languages</div>
+        <div class="personal-value">Marathi · Hindi · English</div>
+      </div>
+    </div>
+    <div class="personal-item reveal">
+      <span style="font-size:1.4rem">📍</span>
+      <div>
+        <div class="personal-label">Location</div>
+        <div class="personal-value">Nagade, Yeola, Nashik — Maharashtra 423401</div>
+      </div>
+    </div>
+    <div class="personal-item reveal" style="grid-column: 1 / -1;">
+      <span style="font-size:1.4rem">⚽</span>
+      <div>
+        <div class="personal-label">Hobbies &amp; Interests</div>
+        <div class="personal-value">Reading · Football · Cricket · Chess · Bike Riding · Volunteering · Fitness</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  Crafted with precision — <span>Akshay Shrikant Divate</span> · SAP BTP Consultant · &copy; 2026
+</footer>
+
+<script>
+// ===== THEME SWITCHER =====
+function setTheme(theme, btn) {
+  document.documentElement.setAttribute('data-theme', theme);
+  document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// ===== COUNTER ANIMATION =====
+function animateCounters() {
+  document.querySelectorAll('[data-count]').forEach(el => {
+    const target = parseFloat(el.getAttribute('data-count'));
+    const isDecimal = target % 1 !== 0;
+    const isLarge = target >= 100;
+    const duration = isLarge ? 1800 : 1200;
+    const start = performance.now();
+
+    function update(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = eased * target;
+      el.textContent = isDecimal ? current.toFixed(1) : Math.round(current).toLocaleString();
+      if (progress < 1) requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+  });
+}
+
+// ===== INTERSECTION OBSERVER =====
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+
+      // Trigger skill bars
+      entry.target.querySelectorAll('.skill-fill').forEach(bar => {
+        bar.style.width = bar.getAttribute('data-pct') + '%';
+      });
+    }
+  });
+}, { threshold: 0.12 });
+
+// Observe all animated elements
+document.querySelectorAll('.reveal, .timeline-entry, .achievement-card, .cert-card').forEach(el => io.observe(el));
+
+// Observe skills categories to trigger bars
+document.querySelectorAll('.skill-category').forEach(el => io.observe(el));
+
+// Counter trigger on stats bar
+const statsObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      animateCounters();
+      statsObs.disconnect();
+    }
+  });
+}, { threshold: 0.3 });
+statsObs.observe(document.querySelector('.stats-bar'));
+
+// Stagger cert cards
+document.querySelectorAll('.cert-card').forEach((card, i) => {
+  card.style.transitionDelay = `${i * 0.08}s`;
+});
+
+// Stagger achievement cards
+document.querySelectorAll('.achievement-card').forEach((card, i) => {
+  card.style.transitionDelay = `${i * 0.07}s`;
+});
+
+// Stagger timeline entries
+document.querySelectorAll('.timeline-entry').forEach((entry, i) => {
+  entry.style.transitionDelay = `${i * 0.1}s`;
+});
+</script>
+</body>
+</html>
